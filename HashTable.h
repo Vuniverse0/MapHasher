@@ -15,7 +15,6 @@ typedef std::uint8_t hashType;
 typedef std::uint16_t dataSize;
 typedef std::uint32_t cords;
 typedef std::uint64_t pointerSize;
-static pointerSize zero[8];
 union flags{
     hashType hash;
     struct {
@@ -23,72 +22,35 @@ union flags{
         hashType y: 1;
         hashType x: 1;
     };
-} flags;
-class HashTable {
-    FILE* file;
-    FILE* DATAfile;
-    static  union flags generateBitset(const cords& y,const cords& x)
-    {
-        flags.hash=0;
+};
+struct bitIndetificator{
+    bitIndetificator(const cords& y, const cords& x){
+        f.hash=0;
         if(y>=x){
-            flags.yHx=1;
+            f.yHx=1;
         }
         if(y%2==0){
-            flags.y=1;
+            f.y=1;
         }
         if(x%2==0){
-            flags.x=1;
+            f.x=1;
         }
-        hashType P =  flags.hash;
+        hashType P =  f.hash;
         std::cout<<"Generates bitset eqality to: " << ((int)P) << std::endl;
         std::cout<<"        first bit: " << (y>=x) << std::endl;
         std::cout<<"       second bit: " << (y%2==0) << std::endl;
         std::cout<<"        third bit: " << (x%2==0) << std::endl;
-        return flags;
     }
-    pointerSize writeData(dataSize size,FILE* data)
+    hashType get()
     {
-        pointerSize temp=(unsigned long)ftell(data);
-        char* buff;
-        fread(buff,1,size,data);
-        fwrite(&size, sizeof(dataSize), 1, DATAfile);
-        fwrite(buff, 1,size, DATAfile);
-        return temp;
+        return f.hash;
     }
-    inline void setHashTablePosition(hashType h)//Set position in file to hash
-    {
-        hashType n=flags.hash;//Get rows
-        std::cout<<"rows: "<<n<<" columns: "<<h<<std::endl;
-        n=(n*sizeof(pointerSize))+(h*8*sizeof(pointerSize));//Get columns and get cell position
-        fseek(file,n, SEEK_SET);// to cell
-        checkPosition(file);
-    }
-    static inline cords generateHash(const cords& y,const cords& x)
-    {
-        return (y>=x)?(y-x):(x-y);
-    }
-    static inline hashType generateHashIndex(const cords& hash)
-    {
-        return hash%HASHSIZE;
-    }
-    static inline dataSize getFileSize(FILE* data)
-    {
-        fseek(data, 0, SEEK_END);
-        std::cout<<"Data size:"<<(unsigned long)ftell(data)<<std::endl;
-        return (unsigned long)ftell(data);
-    }
-    static const inline void checkPosition(FILE* file)
-    {
-        uint64_t pos=(unsigned long)ftell(file);
-        std::cout<<"Data position : "<<pos<<std::endl;
-    }
-    public:
+private:
+    flags f;
+};
+struct HashTable {
     HashTable()
     {
-        for(uint8_t i=0;i<8;i++)
-            zero[i]=-1;
-
-        file=fopen("/home/vuniverse/CLionProjects/CordsSorter/Output/hashes","wb+");//info file :
         /* Hash Table:         Columns:8
          *
          *     Rows: 255     Start node of singly linked list
@@ -100,13 +62,26 @@ class HashTable {
          *          Pointer to position of next node. Can also be pointer to end iterator or non valid
          *
          */
+        file=fopen("/home/vuniverse/CLionProjects/CordsSorter/Output/hashes","wb+");//info file :
         DATAfile=fopen("/home/vuniverse/CLionProjects/CordsSorter/Output/values","wb+");
-        uint8_t i=0;
+        fwrite(&zero,sizeof(pointerSize),1,DATAfile);
+        fseek(DATAfile,sizeof(pointerSize),SEEK_CUR);
+        uint16_t i=0;
         do{
-            fwrite(&zero,sizeof(pointerSize),8,file);
+            fwrite(&zero,sizeof(pointerSize),1,file);
+            fseek(file,sizeof(pointerSize),SEEK_CUR);
             i++;
-        }while(i != HASHSIZE);
-        std::cout<<"Successful, files was opened"<<std::endl;
+        }while(i != HASHSIZE*8);
+        std::cout<<"Successful, files was opened. Data Hashes: "<<((int)i)<<" ("<<HASHSIZE<<" * "<<(i/HASHSIZE)<<" )"<<std::endl;
+        /*pointerSize temp;
+        uint16_t a=0;
+        fwrite(&temp,sizeof(pointerSize),1,file);
+        std::cout<<"A: "<<((int)a)<<" Point to "<<temp<<std::endl;
+        do{
+            a++;
+            fwrite(&temp,sizeof(pointerSize),8,file);
+            std::cout<<"A: "<<((int)a)<<" Point to "<<temp<<std::endl;
+        }while(a != HASHSIZE*8);*/
     }
     ~HashTable()
     {
@@ -117,7 +92,7 @@ class HashTable {
     void write(const cords& y,const cords& x,FILE* data)
     {
         //Generate HASHES
-        generateBitset(y,x);//generate bit flags to variable flags os type union flags
+        hashType n=generateHash(y,x);//generate bit flags to variable flags os type union flags
 
         cords c=generateHash(y,x);//Individual hash for node
 
@@ -146,12 +121,12 @@ class HashTable {
         std::cout<<(dbg2*sizeof(cords))<<" bytes of cords\n";//Cords
         std::cout<<(dbg3*sizeof(pointerSize))<<" bytes of pointer to data"<<std::endl;//Data position
 
-        setHashTablePosition(h);//Go to cell in table
+        setHashTablePosition(h,n);//Go to cell in table
         pointerSize temp;
         while(true) {        //Check pointer
-            fwrite(&temp,sizeof(pointerSize),1,file);
+            fread(&temp,sizeof(pointerSize),1,file);
             checkPosition(file);//DEBUG
-            if (temp == -1) {
+            if (temp == 0) {
                 std::cout<<"Not valid, pointer is clear. Value: "<<((int)temp)<<std::endl;
                 std::cout<<"Try to write node position: "<<((int)nodepos)<<std::endl;
                 int debag=fwrite(&nodepos, sizeof(pointerSize), 1, file);
@@ -166,20 +141,56 @@ class HashTable {
                 fseek(file,temp,SEEK_SET);
             }
         }
-        /*
-        uint8_t i=0;
-        fwrite(&temp,sizeof(pointerSize),8,file);
-        std::cout<<"I: "<<((int)i)<<" Point to "<<temp.__pos<<std::endl;
-        do{
-            i++;
-            fwrite(&temp,sizeof(pointerSize),8,file);
-            std::cout<<"I: "<<((int)i)<<" Point to "<<temp.__pos<<std::endl;
-        }while(i != HASHSIZE);
-         */
         fseek(file,0,SEEK_END);
         std::cout<<"Data writen\n\n\n\n"<<std::endl;
 
     }
+private:
+    pointerSize zero=0;
+    FILE* file;
+    FILE* DATAfile;
+    static hashType generateBitset(const cords& y,const cords& x)
+    {
+        bitIndetificator bitset(y,x);
+        return bitset.get();
+    }
+    pointerSize writeData(dataSize size,FILE* data)
+    {
+        pointerSize temp=(unsigned long)ftell(data);
+        char* buff;
+        fread(buff,1,size,data);
+        fwrite(&size, sizeof(dataSize), 1, DATAfile);
+        fwrite(buff, 1,size, DATAfile);
+        return temp;
+    }
+    inline void setHashTablePosition(hashType h,hashType n)//Set position in file to hash
+    {
+        std::cout<<"rows: "<<((int)n)<<" columns: "<<((int)h)<<std::endl;
+        pointerSize temp=(n*sizeof(pointerSize))+(h*8*sizeof(pointerSize));//Get columns and get cell position
+        fseek(file,temp,SEEK_SET);// to cell
+        checkPosition(file);
+    }
+    static inline cords generateHash(const cords& y,const cords& x)
+    {
+        return (y>=x)?(y-x):(x-y);
+    }
+    static inline hashType generateHashIndex(const cords& hash)
+    {
+        return hash%HASHSIZE;
+    }
+    static inline dataSize getFileSize(FILE* data)
+    {
+        fseek(data, 0, SEEK_END);
+        std::cout<<"Data size:"<<(unsigned long)ftell(data)<<std::endl;
+        return (unsigned long)ftell(data);
+    }
+    static const inline void checkPosition(FILE* file)
+    {
+        uint64_t pos=(unsigned long)ftell(file);
+        std::cout<<"Current position : "<<pos<<std::endl;
+    }
+
+
 };
 
 
