@@ -64,8 +64,10 @@ struct HashTable {
          */
         file=fopen("/home/vuniverse/CLionProjects/CordsSorter/Output/hashes","wb+");//info file :
         DATAfile=fopen("/home/vuniverse/CLionProjects/CordsSorter/Output/values","wb+");
+        checkPosition(DATAfile);
         fwrite(&zero,sizeof(pointerSize),1,DATAfile);
-        fseek(DATAfile,sizeof(pointerSize),SEEK_CUR);
+        checkPosition(DATAfile);
+        //fseek(DATAfile,sizeof(pointerSize),SEEK_CUR);
         uint16_t i=0;
         do{
             fwrite(&zero,sizeof(pointerSize),1,file);
@@ -92,7 +94,7 @@ struct HashTable {
 
         pointerSize pos=writeData(size,data);//Got data position end write data
 
-        std::cout<<"Hash cords generated: "<<((int)c)<<std::endl;
+        std::cout<<"Cords generated: "<<((int)c)<<std::endl;
         std::cout<<"Index hash generated: "<<((int)h)<<std::endl;
         std::cout<<"Data size generated: "<<((int)size)<<std::endl;
         std::cout<<"Data position : "<<pos<<std::endl;
@@ -149,7 +151,9 @@ private:
     }
     pointerSize writeData(dataSize size,FILE* data)
     {
-        pointerSize temp=(unsigned long)ftell(data);
+        checkPosition(DATAfile);
+        pointerSize temp=(unsigned long)ftell(DATAfile);
+        std::cout<<"WTF: "<<temp<<std::endl;
         char* buff;
         fread(buff,1,size,data);
         fwrite(&size, sizeof(dataSize), 1, DATAfile);
