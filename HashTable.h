@@ -69,19 +69,9 @@ struct HashTable {
         uint16_t i=0;
         do{
             fwrite(&zero,sizeof(pointerSize),1,file);
-            fseek(file,sizeof(pointerSize),SEEK_CUR);
             i++;
         }while(i != HASHSIZE*8);
         std::cout<<"Successful, files was opened. Data Hashes: "<<((int)i)<<" ("<<HASHSIZE<<" * "<<(i/HASHSIZE)<<" )"<<std::endl;
-        /*pointerSize temp;
-        uint16_t a=0;
-        fwrite(&temp,sizeof(pointerSize),1,file);
-        std::cout<<"A: "<<((int)a)<<" Point to "<<temp<<std::endl;
-        do{
-            a++;
-            fwrite(&temp,sizeof(pointerSize),8,file);
-            std::cout<<"A: "<<((int)a)<<" Point to "<<temp<<std::endl;
-        }while(a != HASHSIZE*8);*/
     }
     ~HashTable()
     {
@@ -92,7 +82,7 @@ struct HashTable {
     void write(const cords& y,const cords& x,FILE* data)
     {
         //Generate HASHES
-        hashType n=generateHash(y,x);//generate bit flags to variable flags os type union flags
+        hashType n=generateBitset(y,x);//generate bit flags to variable flags os type union flags
 
         cords c=generateHash(y,x);//Individual hash for node
 
@@ -123,12 +113,15 @@ struct HashTable {
 
         setHashTablePosition(h,n);//Go to cell in table
         pointerSize temp;
+        pointerSize now;
         while(true) {        //Check pointer
+            now=(unsigned long)ftell(file);
             fread(&temp,sizeof(pointerSize),1,file);
             checkPosition(file);//DEBUG
-            if (temp == 0) {
+            if (temp == zero) {
                 std::cout<<"Not valid, pointer is clear. Value: "<<((int)temp)<<std::endl;
                 std::cout<<"Try to write node position: "<<((int)nodepos)<<std::endl;
+                fseek(file,now,SEEK_SET);
                 int debag=fwrite(&nodepos, sizeof(pointerSize), 1, file);
                 std::cout<<(debag*sizeof(pointerSize))<< " bytes of position was writen"<<std::endl;
                 checkPosition(file);
@@ -149,7 +142,7 @@ private:
     pointerSize zero=0;
     FILE* file;
     FILE* DATAfile;
-    static hashType generateBitset(const cords& y,const cords& x)
+    hashType generateBitset(const cords& y,const cords& x)
     {
         bitIndetificator bitset(y,x);
         return bitset.get();
@@ -165,7 +158,7 @@ private:
     }
     inline void setHashTablePosition(hashType h,hashType n)//Set position in file to hash
     {
-        std::cout<<"rows: "<<((int)n)<<" columns: "<<((int)h)<<std::endl;
+        std::cout<<"Bitset: "<<((int)n)<<" Hash: "<<((int)h)<<std::endl;
         pointerSize temp=(n*sizeof(pointerSize))+(h*8*sizeof(pointerSize));//Get columns and get cell position
         fseek(file,temp,SEEK_SET);// to cell
         checkPosition(file);
