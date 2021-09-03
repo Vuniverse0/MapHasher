@@ -8,7 +8,7 @@
 struct OpenTable {
     OpenTable();
     ~OpenTable();
-    int getData( char* buffer );
+    int getData( const cords& y , const cords& x , char *buffer );
 
 private:
 

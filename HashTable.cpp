@@ -13,8 +13,13 @@
      *     Every info node have pointer(position in file) to next info node that should be in table
      *     Start node have only position without info
      *
+     *     Every first info node have structure like this:
+     *          Pointer to position of next node. Can also be pointer to end iterator or non valid 8 bytes
+     *
      *     Every info node have structure like this:
-     *          Pointer to position of next node. Can also be pointer to end iterator or non valid
+     *          Pointer to next node of data info 8 bytes
+     *          Individual no collision hash      4 bytes
+     *          Data position in data file        8 bytes
      *
      */
     file = std::fopen( "/home/vuniverse/CLionProjects/CordsSorter/Output/hashes", "wb+" );
@@ -43,7 +48,7 @@ void HashTable::write( const cords& y ,const cords& x, FILE* data )
     //Generate HASHES
     cords cord = ( y >= x ) ? ( y - x ) : ( x - y );  //Individual hash for node
     byte row = cord % HASHSIZE;                       //Hash for table
-    byte column = bitIndetificator( y, x ).get();            //generate bit flags to variable flags os type union flags
+    byte column = bitIndetificator( y, x ).get();     //generate bit flags to variable flags os type union flags
 
     memSize size=getFileSize(data );      //Get data file size
 
