@@ -3,13 +3,8 @@
 //
 
 #include "HashTable.h"
-#define HASHSIZE 255
-#define BITSVARIATIONS 8
-typedef std::uint8_t byte;
-typedef std::uint16_t memSize;
-typedef std::uint32_t cords;
-typedef std::uint64_t position;
-
+#include "FileMacro&Aliases.h"
+memSize getFileSize(FILE * data);
  HashTable::HashTable()
  {
      /* Hash Table:         Columns:8
@@ -116,13 +111,6 @@ position HashTable::writeData(const memSize& size, FILE* data)
     return temporalityPosition;
 }
 
-inline memSize HashTable::getFileSize(FILE* data)
-{
-    std::fseek(data, 0, SEEK_END);
-    std::cout<<"Data size:"<<static_cast< unsigned long >( std::ftell( data ) )<<std::endl;
-    return static_cast< unsigned long >( std::ftell( data ) );
-}
-
 const inline void HashTable::checkPosition(FILE* file)
 {
     position pos=static_cast< unsigned long >( ftell( file ) );
@@ -142,7 +130,7 @@ HashTable::bitIndetificator::bitIndetificator( const cords& y, const cords& x )
     std::cout << "        third bit: " << ( x % 2 == 0) << std::endl;
 }
 
-byte HashTable::bitIndetificator::get()
+byte HashTable::bitIndetificator::get() const
 {
     return flags.hash;
 }

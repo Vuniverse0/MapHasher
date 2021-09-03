@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/CordsSorter.dir/main.cpp.o CMakeFiles/CordsSorter.dir/HashTable.cpp.o CMakeFiles/CordsSorter.dir/OpenTable.cpp.o CMakeFiles/CordsSorter.dir/functions.cpp.o  -o CordsSorter 

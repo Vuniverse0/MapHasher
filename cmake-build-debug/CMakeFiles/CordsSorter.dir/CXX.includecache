@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vuniverse/CLionProjects/CordsSorter/FileMacro&Aliases.h
+cstdint
+-
+
+/home/vuniverse/CLionProjects/CordsSorter/HashTable.cpp
+HashTable.h
+/home/vuniverse/CLionProjects/CordsSorter/HashTable.h
+FileMacro&Aliases.h
+/home/vuniverse/CLionProjects/CordsSorter/FileMacro&Aliases.h
+
+/home/vuniverse/CLionProjects/CordsSorter/HashTable.h
+cstdio
+-
+cstdint
+-
+cassert
+-
+iostream
+-
+FileMacro&Aliases.h
+/home/vuniverse/CLionProjects/CordsSorter/FileMacro&Aliases.h
+
+/home/vuniverse/CLionProjects/CordsSorter/functions.cpp
+cstdio
+-
+FileMacro&Aliases.h
+/home/vuniverse/CLionProjects/CordsSorter/FileMacro&Aliases.h
+

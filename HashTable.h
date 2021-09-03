@@ -9,14 +9,7 @@
 #include <cstdint>//for fixed size integers
 #include <cassert>//for assert
 #include <iostream>//for cout
-
-#define HASHSIZE 255
-#define BITSVARIATIONS 8
-typedef std::uint8_t byte;
-typedef std::uint16_t memSize;
-typedef std::uint32_t cords;
-typedef std::uint64_t position;
-
+#include "FileMacro&Aliases.h"
 
 struct HashTable {
     HashTable();
@@ -27,11 +20,10 @@ private:
     FILE* file;
     FILE* memory;
     position writeData(const memSize& size, FILE* data);
-    static inline memSize getFileSize(FILE* data);
     static const inline void checkPosition(FILE* file);
     struct bitIndetificator {
         bitIndetificator( const cords& y, const cords& x );
-        byte get();
+        byte get() const;
     private :
         union {
             byte hash;
