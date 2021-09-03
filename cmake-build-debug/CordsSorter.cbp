@@ -100,6 +100,9 @@
 		<Unit filename="/home/vuniverse/CLionProjects/CordsSorter/functions.cpp">
 			<Option target="CordsSorter"/>
 		</Unit>
+		<Unit filename="/home/vuniverse/CLionProjects/CordsSorter/functions.h">
+			<Option target="CordsSorter"/>
+		</Unit>
 		<Unit filename="/home/vuniverse/CLionProjects/CordsSorter/main.cpp">
 			<Option target="CordsSorter"/>
 		</Unit>

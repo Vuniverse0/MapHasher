@@ -3,8 +3,7 @@
 //
 
 #include "HashTable.h"
-#include "FileMacro&Aliases.h"
-memSize getFileSize(FILE * data);
+#include "functions.h"
  HashTable::HashTable()
  {
      /* Hash Table:         Columns:8
@@ -71,8 +70,7 @@ void HashTable::write( const cords& y ,const cords& x, FILE* data )
     std::cout << ( dbg3 * sizeof( position ) ) << " bytes of pointer to data" << std::endl;    //Data position
 
     std::cout << "Bits: " << ( ( int ) column ) << " Hash: " << ( ( int ) row ) << std::endl;
-    position hashtablePosition = ( column * sizeof( position ) ) + ( row * BITSVARIATIONS * sizeof( position ) );
-    std::fseek( file, hashtablePosition, SEEK_SET ); //Set position in hashtable
+    setHashTablePosition(column,row,file);//Set position in hashtable
 
     checkPosition( file );
 
@@ -109,28 +107,4 @@ position HashTable::writeData(const memSize& size, FILE* data)
     std::fwrite( &size, sizeof( memSize ), 1, memory );
     std::fwrite( buff, 1, size, memory );
     return temporalityPosition;
-}
-
-const inline void HashTable::checkPosition(FILE* file)
-{
-    position pos=static_cast< unsigned long >( ftell( file ) );
-    std::cout<<"Current position : "<<pos<<std::endl;
-}
-
-HashTable::bitIndetificator::bitIndetificator( const cords& y, const cords& x )
-{
-    flags.hash = 0;
-    flags.yHx = ( y >= x ) ? 1 : 0;
-    flags.y = ( y%2 == 0 ) ? 1 : 0;
-    flags.x = ( x%2 == 0 ) ? 1 : 0;
-    byte P =  flags.hash;
-    std::cout << "Generates bitset eqality to: " << ( ( int ) P ) << std::endl;
-    std::cout << "        first bit: " << ( y >= x) << std::endl;
-    std::cout << "       second bit: " << ( y % 2 == 0) << std::endl;
-    std::cout << "        third bit: " << ( x % 2 == 0) << std::endl;
-}
-
-byte HashTable::bitIndetificator::get() const
-{
-    return flags.hash;
 }

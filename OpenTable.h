@@ -5,17 +5,16 @@
 #ifndef CORDSSORTER_OPENTABLE_H
 #define CORDSSORTER_OPENTABLE_H
 #include "FileMacro&Aliases.h"
-
 struct OpenTable {
-    OpenTable()
-    {
+    OpenTable();
+    ~OpenTable();
+    int getData( char* buffer );
 
-    }
-    ~OpenTable()
-    {
+private:
 
-    }
-
+    position zero = ZERO;
+    FILE* file;
+    FILE* memory;
 };
 
 

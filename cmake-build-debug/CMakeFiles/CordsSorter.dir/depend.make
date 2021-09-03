@@ -4,13 +4,16 @@
 CMakeFiles/CordsSorter.dir/HashTable.cpp.o: ../FileMacro&Aliases.h
 CMakeFiles/CordsSorter.dir/HashTable.cpp.o: ../HashTable.cpp
 CMakeFiles/CordsSorter.dir/HashTable.cpp.o: ../HashTable.h
+CMakeFiles/CordsSorter.dir/HashTable.cpp.o: ../functions.h
 
 CMakeFiles/CordsSorter.dir/OpenTable.cpp.o: ../FileMacro&Aliases.h
 CMakeFiles/CordsSorter.dir/OpenTable.cpp.o: ../OpenTable.cpp
 CMakeFiles/CordsSorter.dir/OpenTable.cpp.o: ../OpenTable.h
+CMakeFiles/CordsSorter.dir/OpenTable.cpp.o: ../functions.h
 
 CMakeFiles/CordsSorter.dir/functions.cpp.o: ../FileMacro&Aliases.h
 CMakeFiles/CordsSorter.dir/functions.cpp.o: ../functions.cpp
+CMakeFiles/CordsSorter.dir/functions.cpp.o: ../functions.h
 
 CMakeFiles/CordsSorter.dir/main.cpp.o: ../FileMacro&Aliases.h
 CMakeFiles/CordsSorter.dir/main.cpp.o: ../HashTable.h
