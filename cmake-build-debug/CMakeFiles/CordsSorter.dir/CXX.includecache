@@ -34,35 +34,9 @@ functions.h
 FileMacro&Aliases.h
 /home/vuniverse/CLionProjects/CordsSorter/FileMacro&Aliases.h
 
-/home/vuniverse/CLionProjects/CordsSorter/functions.cpp
-FileMacro&Aliases.h
-/home/vuniverse/CLionProjects/CordsSorter/FileMacro&Aliases.h
-functions.h
-/home/vuniverse/CLionProjects/CordsSorter/functions.h
-
 /home/vuniverse/CLionProjects/CordsSorter/functions.h
 cstdio
 -
 FileMacro&Aliases.h
 /home/vuniverse/CLionProjects/CordsSorter/FileMacro&Aliases.h
-
-/home/vuniverse/CLionProjects/CordsSorter/main.cpp
-iostream
--
-utility
--
-cstdio
--
-cstdint
--
-filesystem
--
-string
--
-cassert
--
-bitset
--
-HashTable.h
-/home/vuniverse/CLionProjects/CordsSorter/HashTable.h
 
