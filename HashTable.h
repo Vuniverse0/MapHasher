@@ -9,7 +9,7 @@
 struct HashTable {
     HashTable();
     ~HashTable();
-    void write( const cords& y ,const cords& x, FILE* data );
+    void write( const cords& y ,const cords& x, FILE* data, memSize tempDebugSize = 0 );
 private:
     position zero = ZERO;
     FILE* file;

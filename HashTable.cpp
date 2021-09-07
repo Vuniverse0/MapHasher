@@ -24,16 +24,16 @@
      */
     file = std::fopen( "/home/vuniverse/CLionProjects/CordsSorter/Output/hashes", "wb+" );
     memory = std::fopen("/home/vuniverse/CLionProjects/CordsSorter/Output/values", "wb" );
-    checkPosition(memory );
+    checkPosition( memory );
     std::fwrite(&zero, sizeof( position ), 1, memory);
-    checkPosition(memory );
+    checkPosition( memory );
     memSize i=0;
     do {
-        std::fwrite(&zero, sizeof(position), 1, file);
+        std::fwrite(&zero, sizeof( position ), 1, file);
         i++;
     } while (i != HASHSIZE * 8);
     std::cout << "Successful, files was opened. Data Hashes: "<<( ( int ) i );
-    std::cout << " (" << HASHSIZE << " * " << (i / HASHSIZE) << " )" << std::endl;
+    std::cout << " (" << ( int ) HASHSIZE << " * " << (i / ( ( int ) HASHSIZE ) ) << " )" << std::endl;
 }
 
 HashTable::~HashTable()
@@ -43,7 +43,7 @@ HashTable::~HashTable()
     std::cout << "Successful, files was closed" << std::endl;
 }
 
-void HashTable::write( const cords& y ,const cords& x, FILE* data )
+void HashTable::write( const cords& y ,const cords& x, FILE* data, memSize tempDebugSize )
 {
     //Generate HASHES
     cords cord = ( y >= x ) ? ( y - x ) : ( x - y );  //Individual hash for node
@@ -52,7 +52,10 @@ void HashTable::write( const cords& y ,const cords& x, FILE* data )
 
     memSize size=getFileSize(data );      //Get data file size
 
-    position pos=writeData( size, data );//Got data position end write data
+    //DEBUG
+    size=( size!=0 ) ? size : tempDebugSize;
+
+    position pos=writeData( size , data );//Got data position end write data
 
     std::cout << "Cords generated: " << ( ( int ) cord ) << std::endl;
     std::cout << "Hash generated: " << ( ( int ) row ) << std::endl;
