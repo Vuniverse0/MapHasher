@@ -111,9 +111,13 @@ position HashTable::writeData(const memSize& size, FILE* data)
     }
 
     auto temporalityPosition=static_cast< unsigned long >( std::ftell( memory ) );
-    char *buff ;
-    std::fread(buff, 1, size, data);
+    char buff[ size ];
+    std::fread(buff, size, 1, data);
+    std::cout<<"BUFFER "<<buff<< " wtf "<<size<<std::endl;
+    checkPosition(memory);
     std::fwrite( &size, sizeof( memSize ), 1, memory );
-    std::fwrite( buff, 1, size, memory );
+    checkPosition(memory);
+    std::fwrite( buff, size, 1, memory );
+    checkPosition(memory);
     return temporalityPosition;
 }

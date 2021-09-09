@@ -7,6 +7,7 @@
 #include <string>//for string
 #include <cassert>//for assert
 #include <bitset>//for bitset
+#include <cstring>
 
 #include "HashTable.h"
 #include "OpenTable.h"
@@ -42,10 +43,10 @@ int WriteDatabase(const std::string& dir = "/home/vuniverse/CLionProjects/CordsS
     fnameNs path;
 
     for ( auto& item:fs::directory_iterator( dir ) ){
-        path = ParseName(item.path());
-        std::string s=item.path();
+        std::string s = item.path() ;
+        uint16_t size = std::filesystem::file_size( s );
+        path = ParseName( s );
         std::FILE *file = std::fopen( s.c_str(), "rb");
-        uint16_t size = getFileSize(file);
 
         std::cout << "Y: " << path.first << " X: " << path.second << std::endl;
         std::cout << "Try to write file " << s << std::endl;
@@ -54,6 +55,11 @@ int WriteDatabase(const std::string& dir = "/home/vuniverse/CLionProjects/CordsS
         std::fclose( file );
     }
     return 0;
+}
+static char* ReadDataBase( std::string name ){
+    static OpenTable table;
+    fnameNs path = ParseName( name );
+    return table.getData( path.first, path.second);
 }
 int writeTest()
 {
@@ -93,13 +99,12 @@ static int readTest(){
         std::cout << "Try to read " << str << std::endl;
         std::cout << "Y: " << path.first << " X: " << path.second << std::endl;
 
-        char *buff = nullptr;
-        uint16_t result = table.getData( path.first, path.second, buff);
+        char* result = table.getData( path.first, path.second);
         uint16_t size = GetDebugSize( str );
 
-        std::cout << "Size from table: " << ( ( int ) result ) << std::endl;
+        std::cout << "Size from table: " << ( std::strlen( result ) ) << std::endl;
         std::cout << "Native size: " << ( ( int ) size ) << "\n\n" << std::endl;
-        if( result != size ){
+        if( std::strlen( result ) != size ){
             std::cerr << "DOESNT EQUAL!!!" << std::endl;
             exit( 1 );
         }
@@ -109,7 +114,16 @@ static int readTest(){
 }
 int main(int argc, char *argv[])
 {
-    writeTest();
-    readTest();
+    FILE* file1 = fopen("/home/vuniverse/CLionProjects/CordsSorter/Data/y929999x1029y120z10","wb");
+    char buff[] = "0102";
+    fwrite(&buff,4,1,file1);
+    fclose(file1);
+    file1 = fopen("/home/vuniverse/CLionProjects/CordsSorter/Data/y929999x1029y120z10","rb");
+    fread(&buff,4,1,file1);
+    fclose(file1);
+    std::cout<< buff << std::endl;
+    WriteDatabase();
+    char* data = ReadDataBase("y929999x1029y120z10" );
+    std::cout<< data << std::endl;
     return 0;
 }
