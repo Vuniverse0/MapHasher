@@ -36,10 +36,6 @@ bitIndetificator::bitIndetificator( const cords& y, const cords& x )
     flags.y = ( y%2 == 0 ) ? 1 : 0;
     flags.x = ( x%2 == 0 ) ? 1 : 0;
     byte P =  flags.hash;
-    std::cout << "Generates bitset eqality to: " << ( ( int ) P ) << std::endl;
-    std::cout << "        first bit: " << ( y >= x) << std::endl;
-    std::cout << "       second bit: " << ( y % 2 == 0) << std::endl;
-    std::cout << "        third bit: " << ( x % 2 == 0) << std::endl;
 }
 
 byte bitIndetificator::get() const

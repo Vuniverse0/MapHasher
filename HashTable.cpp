@@ -43,19 +43,13 @@ HashTable::~HashTable()
     std::cout << "Successful, files was closed" << std::endl;
 }
 
-void HashTable::write( const cords& y ,const cords& x, FILE* data, memSize tempDebugSize )
+void HashTable::write( const cords& y ,const cords& x,  memSize size ,  FILE* data )
 {
     //Generate HASHES
     cords cord = ( y >= x ) ? ( y - x ) : ( x - y );  //Individual hash for node
     byte row = cord % HASHSIZE;                       //Hash for table
     byte column = bitIndetificator( y, x ).get();     //generate bit flags to variable flags os type union flags
-
-    memSize size=getFileSize(data );      //Get data file size
-
-    //DEBUG
-    size=( size!=0 ) ? size : tempDebugSize;
-
-    position pos=writeData( size , data );//Got data position end write data
+    position pos = writeData(size, data);//Got data position end write data
 
     std::cout << "Cords generated: " << ( ( int ) cord ) << std::endl;
     std::cout << "Hash generated: " << ( ( int ) row ) << std::endl;
@@ -96,10 +90,8 @@ void HashTable::write( const cords& y ,const cords& x, FILE* data, memSize tempD
     std::cout << "Try to write node position: " << ( ( int ) nodepos ) << std::endl;
 
     std::fseek( file, current, SEEK_SET );
-    int debag = std::fwrite( &nodepos, sizeof( position ), 1, file);
+    std::fwrite( &nodepos, sizeof( position ), 1, file);
     std::fseek(file,current,SEEK_SET);
-    std::cout << ( debag * sizeof( position ) ) << " bytes of position was writen" << std::endl;
-    checkPosition( file );
     std::fread( &temp, sizeof( position ), 1, file);
     std::cout << "Now pointed to " << ( ( int ) temp ) << " Break;" << std::endl;
 
@@ -109,8 +101,17 @@ void HashTable::write( const cords& y ,const cords& x, FILE* data, memSize tempD
 position HashTable::writeData(const memSize& size, FILE* data)
 {
     checkPosition(memory);
-    position temporalityPosition=static_cast< unsigned long >( std::ftell( memory ) );
-    char* buff;
+
+    //TEST MODE
+    if ( data == nullptr ) {
+        auto temporalityPosition=static_cast< unsigned long >( std::ftell( memory ) );
+        std::fwrite( &size, sizeof( memSize ), 1, memory );
+        std::fseek( memory, size, SEEK_CUR );
+        return temporalityPosition;
+    }
+
+    auto temporalityPosition=static_cast< unsigned long >( std::ftell( memory ) );
+    char *buff ;
     std::fread(buff, 1, size, data);
     std::fwrite( &size, sizeof( memSize ), 1, memory );
     std::fwrite( buff, 1, size, memory );

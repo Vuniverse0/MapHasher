@@ -18,5 +18,6 @@ CMakeFiles/CordsSorter.dir/functions.cpp.o: ../functions.h
 CMakeFiles/CordsSorter.dir/main.cpp.o: ../FileMacro&Aliases.h
 CMakeFiles/CordsSorter.dir/main.cpp.o: ../HashTable.h
 CMakeFiles/CordsSorter.dir/main.cpp.o: ../OpenTable.h
+CMakeFiles/CordsSorter.dir/main.cpp.o: ../functions.h
 CMakeFiles/CordsSorter.dir/main.cpp.o: ../main.cpp
 

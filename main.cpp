@@ -10,6 +10,7 @@
 
 #include "HashTable.h"
 #include "OpenTable.h"
+#include "functions.h"
 
 namespace fs = std::filesystem;
 typedef std::pair< uint32_t , uint32_t > fnameNs;
@@ -24,44 +25,32 @@ static inline void clearPath( std::string& s )
     }
     s.erase( s.begin(), it+1);
 }
-static fnameNs GetFileName( std::string s )
+static fnameNs ParseName(std::string s )
 {
-    //clearPath(  s ); comented for debug
-    uint8_t a = 0;
-    uint8_t b = 0;
-    uint8_t test=0;
-    test=s.find(' ');
-    a = s.find('x');
-    for (auto i = a;i!=s.size();i++){
-        if ( s[i] == 'y' ){
-            b = i;
-        }
-    }
-    uint32_t sub1 = static_cast<uint32_t>( std::stoul( s.substr( test+2, a ) ) );
-    uint32_t sub2 = static_cast<uint32_t>( std::stoul( s.substr( a + 1, b ) ) );
-    return  { sub1 , sub2 };
+    return {
+        static_cast<uint32_t>( std::stoul( s.substr( s.find('y') + 1, s.find('x') ) ) ) ,
+        static_cast<uint32_t>( std::stoul( s.substr( s.find('x') + 1, s.find('y', s.find('x' ) ) ) ) )
+    };
 }
 static uint16_t GetDebugSize( std::string s )
 {
-    uint8_t test=0;
-    test=s.find(' ');
-    uint16_t sub1 = static_cast<uint32_t>( std::stoul( s.substr( 0, test ) ) );
-    std::cout << "Emulated Size " << s.substr( 0, test ) << std::endl;
-    return  sub1;
+    return  static_cast<uint32_t>( std::stoul( s.substr( 0, s.find(' ') ) ) );
 }
-int WriteDatabase()
+int WriteDatabase(const std::string& dir = "/home/vuniverse/CLionProjects/CordsSorter/Data")
 {
     HashTable table;
     fnameNs path;
-    for ( auto& item:fs::directory_iterator( "/home/vuniverse/CLionProjects/CordsSorter/Data" ) ){
-        path = GetFileName(item.path());
-        std::cout << "Y: " << path.first << " X: " << path.second << std::endl;
+
+    for ( auto& item:fs::directory_iterator( dir ) ){
+        path = ParseName(item.path());
         std::string s=item.path();
-        std::cout << "Try to open file " << s << std::endl;
         std::FILE *file = std::fopen( s.c_str(), "rb");
-        std::cout << "Open successful, try to read" << std::endl;
-        table.write( path.first, path.second, file );
-        std::cout << "Successful, go next file" << std::endl;
+        uint16_t size = getFileSize(file);
+
+        std::cout << "Y: " << path.first << " X: " << path.second << std::endl;
+        std::cout << "Try to write file " << s << std::endl;
+
+        table.write( path.first, path.second, size, file);
         std::fclose( file );
     }
     return 0;
@@ -76,47 +65,50 @@ int writeTest()
 
     for (int i=0;i<100;i++){
         getline(file,str);
-        std::cout << "Try to open file " << str << std::endl;
-        path = GetFileName( str );
+        path = ParseName(str);
         uint16_t size = GetDebugSize( str );
+
         std::cout << "Y: " << path.first << " X: " << path.second << std::endl;
         std::cout << "Try to open file " << str << std::endl;
-        std::FILE *file = std::fopen( str.c_str(), "wb");
-        std::cout << "Open successful, try to read" << std::endl;
-        table.write( path.first, path.second, file , size);
-        std::cout << "Successful, go next file\n\n" << std::endl;
-        std::fclose( file );
+
+        table.write( path.first, path.second, size, nullptr);
+
+        std::cout << "\n\n" << std::endl;
     }
     return 0;
 }
 static int readTest(){
-    fnameNs path;
-    std::ifstream file("/home/vuniverse/namesAndSizes");
-    std::string str;
-    getline(file,str);
     OpenTable table;
+    fnameNs path;
+    std::string str;
+
+    std::ifstream file("/home/vuniverse/namesAndSizes");
+    getline(file,str);
+
     for (int i=0;i<100;i++){
+
         getline(file,str);
+        path = ParseName(str);
+
         std::cout << "Try to read " << str << std::endl;
-        path = GetFileName( str );
         std::cout << "Y: " << path.first << " X: " << path.second << std::endl;
-        std::cout << "Try to open file FOR READ " << str << std::endl;
-        //std::FILE *file = std::fopen( str.c_str(), "wb");
-        char* buff;
+
+        char *buff = nullptr;
         uint16_t result = table.getData( path.first, path.second, buff);
-        std::cout << "Size : " << result << "\n\n" << std::endl;
-        //std::fclose( file );
+        uint16_t size = GetDebugSize( str );
+
+        std::cout << "Size from table: " << ( ( int ) result ) << std::endl;
+        std::cout << "Native size: " << ( ( int ) size ) << "\n\n" << std::endl;
+        if( result != size ){
+            std::cerr << "DOESNT EQUAL!!!" << std::endl;
+            exit( 1 );
+        }
+
     }
     return 0;
 }
-int main()
+int main(int argc, char *argv[])
 {
-    std::ifstream file("/home/vuniverse/namesAndSizes");
-    std::string str;
-    for(int i=0;i<10;i++){
-        getline(file,str);
-        std::cout<<str<<std::endl;
-    }
     writeTest();
     readTest();
     return 0;
