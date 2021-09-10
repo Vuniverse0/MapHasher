@@ -58,8 +58,6 @@ int WriteDatabase( const std::string& dir = "/home/vuniverse/CLionProjects/Cords
 }
 int main(int argc, char *argv[])
 {
-    //std::cout<< *argv << std::endl;
-
     WriteDatabase();
     std::string str;
     while ( std::cin >> str ){
