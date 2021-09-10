@@ -15,30 +15,32 @@
 namespace fs = std::filesystem;
 typedef std::pair< uint32_t , uint32_t > fnameNs;
 
-static inline void clearPath( std::string& s )
+static fnameNs ParsePath(std::string s , bool IsntPath=false)
 {
-    auto it = s.begin();
-    for ( auto i = s.begin(); i != s.end(); i++ ){
-        if ( (*i) == '/' ){
-            it = i;
+    if(!IsntPath) {
+        auto it = s.begin();
+        for (auto i = s.begin(); i != s.end(); i++) {
+            if ((*i) == '/') {
+                it = i;
+            }
         }
+        s.erase(s.begin(), it + 1);
     }
-    s.erase( s.begin(), it+1);
-}
-static uint16_t GetDebugSize( std::string s )
-{
-    return  static_cast<uint32_t>( std::stoul( s.substr( 0, s.find(' ') ) ) );
-}
-static fnameNs ParseName(std::string s )
-{
-    clearPath(s);
     return {
-        static_cast<uint32_t>( std::stoul( s.substr( s.find('y') + 1, s.find('x') ) ) ) ,
-        static_cast<uint32_t>( std::stoul( s.substr( s.find('x') + 1, s.find('y', s.find('x' ) ) ) ) )
+        static_cast<uint32_t>( std::stoul( s.substr( 1, s.find('x') ) ) ) ,
+        static_cast<uint32_t>( std::stoul( s.substr( s.find('x') + 1 ) ) )
     };
 }
-
-int WriteDatabase(const std::string& dir = "/home/vuniverse/CLionProjects/CordsSorter/Data")
+static int GetData( std::string& s )
+{
+    static OpenTable table;
+    fnameNs path = ParsePath( s, true );
+    char* buff;
+    uint16_t temp = table.getData(path.first, path.second,buff);
+    s=buff;
+    return temp;
+}
+int WriteDatabase( const std::string& dir = "/home/vuniverse/CLionProjects/CordsSorter/Data" )
 {
     HashTable table;
     fnameNs path;
@@ -48,70 +50,22 @@ int WriteDatabase(const std::string& dir = "/home/vuniverse/CLionProjects/CordsS
         uint16_t size = std::filesystem::file_size(s);
         std::FILE *file = std::fopen( s.c_str(), "rb");
 
-        path = ParseName(s);
+        path = ParsePath(s);
         table.write( path.first, path.second, size, file);
         std::fclose( file );
     }
     return 0;
 }
-/*
-int writeTest()
-{
-    HashTable table;
-    fnameNs path;
-    std::ifstream file("/home/vuniverse/namesAndSizes");
-    std::string str;
-    getline(file,str);
-
-    for (int i=0;i<100;i++){
-        getline(file,str);
-        path = ParseName(str);
-        uint16_t size = GetDebugSize( str );
-
-        std::cout << "Y: " << path.first << " X: " << path.second << std::endl;
-        std::cout << "Try to open file " << str << std::endl;
-
-        table.write( path.first, path.second, size, nullptr);
-
-        std::cout << "\n\n" << std::endl;
-    }
-    return 0;
-}
-static int readTest(){
-    OpenTable table;
-    fnameNs path;
-    std::string str;
-
-    std::ifstream file("/home/vuniverse/namesAndSizes");
-    getline(file,str);
-
-    for (int i=0;i<100;i++){
-
-        getline(file,str);
-        path = ParseName(str);
-
-        std::cout << "Try to read " << str << std::endl;
-        std::cout << "Y: " << path.first << " X: " << path.second << std::endl;
-
-        char *buff = nullptr;
-        uint16_t result = table.getData( path.first, path.second, buff);
-        uint16_t size = GetDebugSize( str );
-
-        std::cout << "Size from table: " << ( ( int ) result ) << std::endl;
-        std::cout << "Native size: " << ( ( int ) size ) << "\n\n" << std::endl;
-        if( result != size ){
-            std::cerr << "DOESNT EQUAL!!!" << std::endl;
-            exit( 1 );
-        }
-
-    }
-    return 0;
-}*/
 int main(int argc, char *argv[])
 {
-    std::cout<< *argv << std::endl;
+    //std::cout<< *argv << std::endl;
 
     WriteDatabase();
+    std::string str;
+    while ( std::cin >> str ){
+        GetData( str );
+        std::cout << "Out: " << str << std::endl;
+    }
 
     return 0;
 }

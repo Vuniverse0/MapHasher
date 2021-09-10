@@ -13,10 +13,10 @@ OpenTable::OpenTable()
 
 OpenTable::~OpenTable()
 {
-    fclose(file);
-    fclose(memory);
+    std::fclose(file);
+    std::fclose(memory);
 }
-int OpenTable::getData( const cords& y , const cords& x , char* buffer )
+memSize OpenTable::getData( const cords& y , const cords& x , char*& buffer )
 {
     //Generate HASHES
     cords cord = ( y >= x ) ? ( y - x ) : ( x - y );  //Individual hash for node
@@ -27,6 +27,10 @@ int OpenTable::getData( const cords& y , const cords& x , char* buffer )
     position temp;
     //moving from table to data list
     std::fread( &temp, sizeof( position ), 1, file );
+    if(temp==ZERO){
+        std::cerr << " Empty table row "<< std::endl;
+        return 0;
+    }
     std::fseek(file, temp, SEEK_SET);
     
     cords hash;
@@ -43,7 +47,8 @@ int OpenTable::getData( const cords& y , const cords& x , char* buffer )
             memSize size;
             std::fread( &size, sizeof( memSize ), 1, memory);
 
-            buffer = new char[ size ];
+            buffer = new char[ size+1 ];
+            buffer[ size ] = '\0';
             std::fread( buffer, size, 1, memory);
             //yea, this is fucking raw pointer. Don`t forgot to clean data ;)
             return size;
@@ -51,5 +56,6 @@ int OpenTable::getData( const cords& y , const cords& x , char* buffer )
             std::fseek(file, temp, SEEK_SET);
         }
     }while ( temp != zero );
+    std::cerr << " Couldn't find same element "<< std::endl;
     return 0;
 }
