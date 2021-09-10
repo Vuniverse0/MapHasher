@@ -25,36 +25,36 @@ static inline void clearPath( std::string& s )
     }
     s.erase( s.begin(), it+1);
 }
+static uint16_t GetDebugSize( std::string s )
+{
+    return  static_cast<uint32_t>( std::stoul( s.substr( 0, s.find(' ') ) ) );
+}
 static fnameNs ParseName(std::string s )
 {
+    clearPath(s);
     return {
         static_cast<uint32_t>( std::stoul( s.substr( s.find('y') + 1, s.find('x') ) ) ) ,
         static_cast<uint32_t>( std::stoul( s.substr( s.find('x') + 1, s.find('y', s.find('x' ) ) ) ) )
     };
 }
-static uint16_t GetDebugSize( std::string s )
-{
-    return  static_cast<uint32_t>( std::stoul( s.substr( 0, s.find(' ') ) ) );
-}
+
 int WriteDatabase(const std::string& dir = "/home/vuniverse/CLionProjects/CordsSorter/Data")
 {
     HashTable table;
     fnameNs path;
 
     for ( auto& item:fs::directory_iterator( dir ) ){
-        path = ParseName(item.path());
         std::string s=item.path();
+        uint16_t size = std::filesystem::file_size(s);
         std::FILE *file = std::fopen( s.c_str(), "rb");
-        uint16_t size = getFileSize(file);
 
-        std::cout << "Y: " << path.first << " X: " << path.second << std::endl;
-        std::cout << "Try to write file " << s << std::endl;
-
+        path = ParseName(s);
         table.write( path.first, path.second, size, file);
         std::fclose( file );
     }
     return 0;
 }
+/*
 int writeTest()
 {
     HashTable table;
@@ -106,10 +106,12 @@ static int readTest(){
 
     }
     return 0;
-}
+}*/
 int main(int argc, char *argv[])
 {
-    writeTest();
-    readTest();
+    std::cout<< *argv << std::endl;
+
+    WriteDatabase();
+
     return 0;
 }

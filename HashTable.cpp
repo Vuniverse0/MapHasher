@@ -43,7 +43,7 @@ HashTable::~HashTable()
     std::cout << "Successful, files was closed" << std::endl;
 }
 
-void HashTable::write( const cords& y ,const cords& x,  memSize size ,  FILE* data )
+void HashTable::write( const cords& y ,const cords& x,  memSize size ,  FILE*& data )
 {
     //Generate HASHES
     cords cord = ( y >= x ) ? ( y - x ) : ( x - y );  //Individual hash for node
@@ -98,22 +98,12 @@ void HashTable::write( const cords& y ,const cords& x,  memSize size ,  FILE* da
     std::cout << "Data writen\n\n\n" << std::endl;
 
 }
-position HashTable::writeData(const memSize& size, FILE* data)
+position HashTable::writeData(const memSize& size, FILE*& data)
 {
-    checkPosition(memory);
-
-    //TEST MODE
-    if ( data == nullptr ) {
-        auto temporalityPosition=static_cast< unsigned long >( std::ftell( memory ) );
-        std::fwrite( &size, sizeof( memSize ), 1, memory );
-        std::fseek( memory, size, SEEK_CUR );
-        return temporalityPosition;
-    }
-
     auto temporalityPosition=static_cast< unsigned long >( std::ftell( memory ) );
-    char *buff ;
-    std::fread(buff, 1, size, data);
+    char* buff ;
+    std::fread(buff, size, 1, data);
     std::fwrite( &size, sizeof( memSize ), 1, memory );
-    std::fwrite( buff, 1, size, memory );
+    std::fwrite( buff, size, 1, memory );
     return temporalityPosition;
 }

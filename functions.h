@@ -7,8 +7,6 @@
 #include <cstdio>//for working with files
 #include "FileMacro&Aliases.h"
 
-memSize getFileSize(FILE * data);
-
 void setHashTablePosition(const byte& column,const byte& row,FILE* file);
 
 void checkPosition(FILE* file);

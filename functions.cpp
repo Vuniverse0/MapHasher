@@ -4,11 +4,6 @@
 #include "FileMacro&Aliases.h"
 #include "functions.h"
 
-memSize getFileSize(FILE * data)
-{
-    std::fseek(data, 0, SEEK_END);
-    return static_cast< unsigned long >( std::ftell( data ) );
-}
 void setHashTablePosition(const byte& column,const byte& row,FILE* file)
 {
     position hashtablePosition = ( column * sizeof( position ) ) + ( row * BITSVARIATIONS * sizeof( position ) );

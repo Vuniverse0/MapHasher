@@ -9,12 +9,12 @@
 struct HashTable {
     HashTable();
     ~HashTable();
-    void write( const cords& y ,const cords& x,  memSize tempDebugSize, FILE* data= nullptr);
+    void write( const cords& y ,const cords& x,  memSize tempDebugSize, FILE*& data);
 private:
     position zero = ZERO;
     FILE* file;
     FILE* memory;
-    position writeData(const memSize& size, FILE* data);
+    position writeData(const memSize& size, FILE*& data);
 };
 
 
