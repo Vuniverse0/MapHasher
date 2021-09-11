@@ -9,7 +9,6 @@
 
 void setHashTablePosition(const byte& column,const byte& row,FILE* file);
 
-void checkPosition(FILE* file);
 
 
 struct bitIndetificator {

@@ -1,17 +1,11 @@
 #include <iostream>//for debug
-#include <fstream>// std::ifstream
 #include <utility>//for pairs
 #include <cstdio>//for working with files
 #include <cstdint>//for fixed size integers
 #include <filesystem>//for working with directory
 #include <string>//for string
-#include <cassert>//for assert
-#include <bitset>//for bitset
-
 #include "HashTable.h"
 #include "OpenTable.h"
-#include "functions.h"
-
 namespace fs = std::filesystem;
 typedef std::pair< uint32_t , uint32_t > fnameNs;
 
@@ -63,7 +57,7 @@ int main(int argc, char *argv[])
     std::string str;
     while ( std::cin >> str ){
         GetData( str );
-        std::cout << "Out: " << str << std::endl;
+        std::cout << "Data:\n---\n" << str << "---\nend of data\n"<< std::endl;
     }
 
     return 0;

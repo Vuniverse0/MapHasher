@@ -9,18 +9,11 @@ void setHashTablePosition(const byte& column,const byte& row,FILE* file)
     position hashtablePosition = ( column * sizeof( position ) ) + ( row * BITSVARIATIONS * sizeof( position ) );
     std::fseek( file, hashtablePosition, SEEK_SET ); //Set position in hashtable
 }
-void checkPosition(FILE* file)
-{
-    position pos=static_cast< unsigned long >( ftell( file ) );
-    std::cout<<"Current position : "<<pos<<std::endl;
-}
+
 //Fake macro lol ;) But if i will change this, I should not recompile all project.
 const position ZERO = 0;
-
 const byte HASHSIZE = 255;
-
 const byte BITSVARIATIONS = 8;
-
 
 //Bytes flags generator defintion
 
