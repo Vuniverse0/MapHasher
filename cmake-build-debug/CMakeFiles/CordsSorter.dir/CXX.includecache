@@ -14,13 +14,11 @@ cstdio
 iostream
 -
 
-/home/vuniverse/CLionProjects/CordsSorter/HashTable.cpp
-HashTable.h
 /home/vuniverse/CLionProjects/CordsSorter/HashTable.h
-functions.h
-/home/vuniverse/CLionProjects/CordsSorter/functions.h
+FileMacro&Aliases.h
+/home/vuniverse/CLionProjects/CordsSorter/FileMacro&Aliases.h
 
-/home/vuniverse/CLionProjects/CordsSorter/HashTable.h
+/home/vuniverse/CLionProjects/CordsSorter/OpenTable.h
 FileMacro&Aliases.h
 /home/vuniverse/CLionProjects/CordsSorter/FileMacro&Aliases.h
 
@@ -29,4 +27,30 @@ cstdio
 -
 FileMacro&Aliases.h
 /home/vuniverse/CLionProjects/CordsSorter/FileMacro&Aliases.h
+
+/home/vuniverse/CLionProjects/CordsSorter/main.cpp
+iostream
+-
+fstream
+-
+utility
+-
+cstdio
+-
+cstdint
+-
+filesystem
+-
+string
+-
+cassert
+-
+bitset
+-
+HashTable.h
+/home/vuniverse/CLionProjects/CordsSorter/HashTable.h
+OpenTable.h
+/home/vuniverse/CLionProjects/CordsSorter/OpenTable.h
+functions.h
+/home/vuniverse/CLionProjects/CordsSorter/functions.h
 

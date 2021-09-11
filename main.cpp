@@ -38,6 +38,7 @@ static int GetData( std::string& s )
     char* buff;
     uint16_t temp = table.getData(path.first, path.second,buff);
     s=buff;
+    delete buff;
     return temp;
 }
 int WriteDatabase( const std::string& dir = "/home/vuniverse/CLionProjects/CordsSorter/Data" )
