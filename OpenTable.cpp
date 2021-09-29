@@ -16,7 +16,7 @@ OpenTable::~OpenTable()
     std::fclose(file);
     std::fclose(memory);
 }
-memSize OpenTable::getData( const cords& y , const cords& x , char*& buffer )
+memSize OpenTable::getData( const cords& y , const cords& x , std::string& s )
 {
     //Generate HASHES
     cords cord = ( y >= x ) ? ( y - x ) : ( x - y );  //Individual hash for node
@@ -47,9 +47,10 @@ memSize OpenTable::getData( const cords& y , const cords& x , char*& buffer )
             memSize size;
             std::fread( &size, sizeof( memSize ), 1, memory);
 
-            buffer = new char[ size+1 ];
-            buffer[ size ] = '\0';
+            char* buffer = new char[ size+1 ];
+            buffer[size] = '\0';
             std::fread( buffer, size, 1, memory);
+            s=buffer;
             //yea, this is fucking raw pointer. Don`t forgot to clean data ;)
             return size;
         }else {

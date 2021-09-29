@@ -8,7 +8,7 @@
 struct OpenTable {
     OpenTable();
     ~OpenTable();
-    memSize getData( const cords& y , const cords& x , char*& buffer );
+    memSize getData( const cords& y , const cords& x , std::string& s );
 
 private:
 

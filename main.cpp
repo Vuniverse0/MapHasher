@@ -29,10 +29,7 @@ static int GetData( std::string& s )
 {
     static OpenTable table;
     fnameNs path = ParsePath( s, true );
-    char* buff;
-    uint16_t temp = table.getData(path.first, path.second,buff);
-    s=buff;
-    delete buff;
+    uint16_t temp = table.getData(path.first, path.second,s);
     return temp;
 }
 int WriteDatabase( const std::string& dir = "/home/vuniverse/CLionProjects/CordsSorter/Data" )
@@ -57,8 +54,9 @@ int main(int argc, char *argv[])
     std::string str;
     while ( std::cin >> str ){
         GetData( str );
-        std::cout << "Data:\n---\n" << str << "---\nend of data\n"<< std::endl;
+        std::cout << "Data:\n---\n" << str << "\n---\nend of data\n"<< std::endl;
     }
-
     return 0;
 }
+
+
