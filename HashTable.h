@@ -2,20 +2,18 @@
 // Created by vuniverse on 8/21/21.
 //
 
-#ifndef CORDSSORTER_HASHTABLE_H
-#define CORDSSORTER_HASHTABLE_H
-#include "FileMacro&Aliases.h"
+#pragma once
+
+#include "global_and_aliasing.h"
 
 struct HashTable {
-    HashTable();
-    ~HashTable();
-    void write( const cords& y ,const cords& x,  memSize tempDebugSize, FILE*& data);
 private:
     position zero = ZERO;
-    FILE* file;
-    FILE* memory;
-    position writeData(const memSize& size, FILE*& data);
+    std::FILE* file;
+    std::FILE* memory;
+    position writeData(const memSize& size, std::FILE*& data);
+public:
+    HashTable();
+    ~HashTable();
+    void write( const cords& y ,const cords& x,  memSize tempDebugSize, std::FILE*& data);
 };
-
-
-#endif //CORDSSORTER_HASHTABLE_H

@@ -1,15 +1,12 @@
 //
 // Created by vuniverse on 9/3/21.
 //
+#pragma once
 
-#ifndef CORDSSORTER_FUNCTIONS_H
-#define CORDSSORTER_FUNCTIONS_H
 #include <cstdio>//for working with files
-#include "FileMacro&Aliases.h"
+#include "global_and_aliasing.h"
 
-void setHashTablePosition(const byte& column,const byte& row,FILE* file);
-
-
+void setHashTablePosition(const byte& column, const byte& row, std::FILE* file);
 
 struct bitIndetificator {
     bitIndetificator( const cords& y, const cords& x );
@@ -24,4 +21,3 @@ private :
         };
     } flags;
 };
-#endif //CORDSSORTER_FUNCTIONS_H

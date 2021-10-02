@@ -38,7 +38,7 @@ HashTable::~HashTable()
     std::fclose( memory );
 }
 
-void HashTable::write( const cords& y ,const cords& x,  memSize size ,  FILE*& data )
+void HashTable::write( const cords& y ,const cords& x,  memSize size ,  std::FILE*& data )
 {
     //Generate HASHES
     cords cord = ( y >= x ) ? ( y - x ) : ( x - y );  //Individual hash for node
@@ -68,7 +68,7 @@ void HashTable::write( const cords& y ,const cords& x,  memSize size ,  FILE*& d
     std::fseek(file,current,SEEK_SET);
     std::fread( &temp, sizeof( position ), 1, file);
 }
-position HashTable::writeData(const memSize& size, FILE*& data)
+position HashTable::writeData(const memSize& size, std::FILE*& data)
 {
     auto temporalityPosition=static_cast< unsigned long >( std::ftell( memory ) );
     char* buff ;

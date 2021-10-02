@@ -1,10 +1,10 @@
 //
 // Created by vuniverse on 9/2/21.
 //
-#include "FileMacro&Aliases.h"
+#include "global_and_aliasing.h"
 #include "functions.h"
 
-void setHashTablePosition(const byte& column,const byte& row,FILE* file)
+void setHashTablePosition(const byte& column, const byte& row, std::FILE* file)
 {
     position hashtablePosition = ( column * sizeof( position ) ) + ( row * BITSVARIATIONS * sizeof( position ) );
     std::fseek( file, hashtablePosition, SEEK_SET ); //Set position in hashtable

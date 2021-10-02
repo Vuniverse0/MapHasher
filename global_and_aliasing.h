@@ -2,6 +2,7 @@
 // Created by vuniverse on 9/2/21.
 //
 
+#pragma once
 
 //Includes:
 
@@ -12,12 +13,7 @@
 //Debug includes:
 #include <iostream>//DEBUG
 
-
-#ifndef CORDSSORTER_FILEMACRO_ALIASES_H
-#define CORDSSORTER_FILEMACRO_ALIASES_H
-
-
-//Typesefs:
+//Typedefs:
 
 typedef std::uint8_t byte;
 
@@ -27,11 +23,9 @@ typedef std::uint32_t cords;
 
 typedef std::uint64_t position;
 
-//fake macro
+//globals
 extern const position ZERO;
 
 extern const byte HASHSIZE;
 
 extern const byte BITSVARIATIONS;
-
-#endif //CORDSSORTER_FILEMACRO_ALIASES_H
