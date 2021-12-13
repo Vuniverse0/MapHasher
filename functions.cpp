@@ -23,7 +23,6 @@ bitIdentification::bitIdentification(const cords& y, const cords& x )
     flags.yHx = ( y >= x ) ? 1 : 0;
     flags.y = ( y%2 == 0 ) ? 1 : 0;
     flags.x = ( x%2 == 0 ) ? 1 : 0;
-    byte P =  flags.hash;
 }
 
 byte bitIdentification::get() const
