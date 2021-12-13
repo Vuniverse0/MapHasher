@@ -43,7 +43,7 @@ void HashTable::write( const cords& y ,const cords& x,  memSize size ,  std::FIL
     //Generate HASHES
     cords cord = ( y >= x ) ? ( y - x ) : ( x - y );  //Individual hash for node
     byte row = cord % HASHSIZE;                       //Hash for table
-    byte column = bitIndetificator( y, x ).get();     //generate bit flags to variable flags os type union flags
+    byte column = bitIdentification(y, x ).get();     //generate bit flags to variable flags os type union flags
     position pos = writeData(size, data);//Got data position end write data
 
     std::fseek( file, 0, SEEK_END );//Go to end of info file

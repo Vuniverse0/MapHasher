@@ -1,0 +1,7 @@
+Compare of:
+    -/home/vuniverse/CLionProjects/CordsSorter/Output/log.txt
+      &AND&
+    -/home/vuniverse/CLionProjects/CordsSorter/Output/log.txt
+
+
+Files up to date

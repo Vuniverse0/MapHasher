@@ -3,21 +3,21 @@
 //
 #include "global_and_aliasing.h"
 #include "functions.h"
+#include <limits>
 
-void setHashTablePosition(const byte& column, const byte& row, std::FILE* file)
+void setHashTablePosition(const byte& column, const byte& row, std::FILE*& file)
 {
     position hashtablePosition = ( column * sizeof( position ) ) + ( row * BITSVARIATIONS * sizeof( position ) );
     std::fseek( file, hashtablePosition, SEEK_SET ); //Set position in hashtable
 }
 
-//Fake macro lol ;) But if i will change this, I should not recompile all project.
 const position ZERO = 0;
-const byte HASHSIZE = 255;
+const std::uint16_t HASHSIZE = std::numeric_limits<uint16_t>::max();
 const byte BITSVARIATIONS = 8;
 
 //Bytes flags generator defintion
 
-bitIndetificator::bitIndetificator( const cords& y, const cords& x )
+bitIdentification::bitIdentification(const cords& y, const cords& x )
 {
     flags.hash = 0;
     flags.yHx = ( y >= x ) ? 1 : 0;
@@ -26,7 +26,7 @@ bitIndetificator::bitIndetificator( const cords& y, const cords& x )
     byte P =  flags.hash;
 }
 
-byte bitIndetificator::get() const
+byte bitIdentification::get() const
 {
     return flags.hash;
 }

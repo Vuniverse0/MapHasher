@@ -21,7 +21,7 @@ memSize OpenTable::getData( const cords& y , const cords& x , std::string& s )
     //Generate HASHES
     cords cord = ( y >= x ) ? ( y - x ) : ( x - y );  //Individual hash for node
     byte row = cord % HASHSIZE;                       //Hash for table
-    byte column = bitIndetificator( y, x ).get();     //generate bit flags to variable flags os type union flags
+    byte column = bitIdentification(y, x ).get();     //generate bit flags to variable flags os type union flags
     setHashTablePosition(column,row,file);            //Set position in hashtable
 
     position temp;

@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug"/>
+				<Option working_dir="/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug"/>
+				<Option working_dir="/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug"/>
+				<Option working_dir="/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="CordsSorter">
-				<Option output="/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/CordsSorter" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug"/>
+				<Option output="/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/CordsSorter" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -53,15 +53,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 CordsSorter"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 CordsSorter"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="CordsSorter/fast">
-				<Option output="/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/CordsSorter" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug"/>
+				<Option output="/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/CordsSorter" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -75,38 +75,38 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 CordsSorter/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 CordsSorter/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/vuniverse/CLionProjects/Doned/CordsSorter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/vuniverse/CLionProjects/CordsSorter/FileMacro&amp;Aliases.h">
+		<Unit filename="/home/vuniverse/CLionProjects/Doned/CordsSorter/HashTable.cpp">
 			<Option target="CordsSorter"/>
 		</Unit>
-		<Unit filename="/home/vuniverse/CLionProjects/CordsSorter/HashTable.cpp">
+		<Unit filename="/home/vuniverse/CLionProjects/Doned/CordsSorter/HashTable.h">
 			<Option target="CordsSorter"/>
 		</Unit>
-		<Unit filename="/home/vuniverse/CLionProjects/CordsSorter/HashTable.h">
+		<Unit filename="/home/vuniverse/CLionProjects/Doned/CordsSorter/OpenTable.cpp">
 			<Option target="CordsSorter"/>
 		</Unit>
-		<Unit filename="/home/vuniverse/CLionProjects/CordsSorter/OpenTable.cpp">
+		<Unit filename="/home/vuniverse/CLionProjects/Doned/CordsSorter/OpenTable.h">
 			<Option target="CordsSorter"/>
 		</Unit>
-		<Unit filename="/home/vuniverse/CLionProjects/CordsSorter/OpenTable.h">
+		<Unit filename="/home/vuniverse/CLionProjects/Doned/CordsSorter/functions.cpp">
 			<Option target="CordsSorter"/>
 		</Unit>
-		<Unit filename="/home/vuniverse/CLionProjects/CordsSorter/functions.cpp">
+		<Unit filename="/home/vuniverse/CLionProjects/Doned/CordsSorter/functions.h">
 			<Option target="CordsSorter"/>
 		</Unit>
-		<Unit filename="/home/vuniverse/CLionProjects/CordsSorter/functions.h">
+		<Unit filename="/home/vuniverse/CLionProjects/Doned/CordsSorter/global_and_aliasing.h">
 			<Option target="CordsSorter"/>
 		</Unit>
-		<Unit filename="/home/vuniverse/CLionProjects/CordsSorter/main.cpp">
+		<Unit filename="/home/vuniverse/CLionProjects/Doned/CordsSorter/main.cpp">
 			<Option target="CordsSorter"/>
 		</Unit>
-		<Unit filename="/home/vuniverse/CLionProjects/CordsSorter/CMakeLists.txt">
+		<Unit filename="/home/vuniverse/CLionProjects/Doned/CordsSorter/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

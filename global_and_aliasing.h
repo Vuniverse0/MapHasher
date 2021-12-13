@@ -26,6 +26,6 @@ typedef std::uint64_t position;
 //globals
 extern const position ZERO;
 
-extern const byte HASHSIZE;
+extern const std::uint16_t HASHSIZE;
 
 extern const byte BITSVARIATIONS;
